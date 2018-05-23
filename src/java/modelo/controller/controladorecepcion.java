@@ -430,14 +430,9 @@ public void metodosemaforo() throws Exception {
                    
                    //METODO QUE CONTROLA LAS HORAS y METODO QUE CONTROLA LA FECHA
                    
-                    if(fechaac.compareTo(fechasa)<=0)
-                    {
-                         managerapp.editarcolorrojo(a.getIdhabitacion().getIdhabitacion());
-                         
-                    
-                    }
+                   
           
-                    if(fechaac.compareTo(fechasa)>=0)
+                    if(fechaac.compareTo(fechasa)==0)
                     {
                          
                       if (horaac.compareTo(horasa)>=0)
@@ -464,6 +459,9 @@ public void metodosemaforo() throws Exception {
             }
 
     }
+
+
+
       
 
 
