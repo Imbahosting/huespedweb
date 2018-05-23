@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>HUESPED</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css"/>
+        <style type="text/css" >
+
+            .img {position:absolute; bottom:0;
+                  background:linear-gradient(30deg, steelblue, white );
+            }
+
+
+        </style>
+    </h:head>
+    <h:body class="body" onload="$('#amodal').modal('show');">
+
+        <h:form id="mensaje">
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="10000" escape="true" /> 
+        </h:form>
+
+
+
+        <b:image class="img img-thumbnail" value="/imagenes/edificio.png"/>
+
+
+
+        <b:modal id="amodal" styleClass="modalPseudoClass" size="modal-md" closable="false" backdrop="false" close-on-escape="false">
+            <div align="center"><h1 style="color: darkslateblue; font-size: 50px" ><b>HUESPED V 0.1</b></h1>
+                <h:outputText  value="Sistema administrador de habitaciones de hotel "></h:outputText> </div>
+
+            <hr></hr>
+            <h:form id="loginform">
+                <h3 align="center" style="color: darkred"><b>INGRESO AL SISTEMA</b></h3><br></br>
+                <b:container  fluid="true" >
+                    <b:row>
+
+                        <b:column col-md="5">
+                            <div align="center">
+                                <b:image value="/imagenes/candado.png" />
+                                <b:messages id="ms"></b:messages>
+                            </div> 
+                        </b:column>
+                        <b:column col-md="7">
+
+                            <div align="right">
+                                <b:inputText fieldSize="lg"  value="#{controladorusuarios.usuario}" placeholder="Usuario" style="font-size: 30px; color: black;"></b:inputText> 
+
+                                <b:inputSecret fieldSize="lg" value="#{controladorusuarios.contrasenia}" placeholder="Contraseña" style="font-size: 30px; color: black;"></b:inputSecret> 
+                            </div>
+                            <br></br>
+                            <div align="center">
+
+                                <b:commandButton style="font-size: 25px; font-weight: bold;" look="success" value="ENTRAR" size="lg" action="#{controladorusuarios.login()}"><b:icon name="log-in"></b:icon>&nbsp;</b:commandButton>
+                            </div> <br></br>
+                        </b:column>
+
+
+                    </b:row>
+
+
+
+
+
+                </b:container>  
+            </h:form>
+            <f:facet name="footer">
+                <h:form>
+    <div align="center">
+        <a class="hvr-float-shadow" href="https://www.facebook.com/imbahosting.com.ec/?ref=br_rs">
+            <b:iconAwesome name="facebook-square" size="3x" style="color: midnightblue"></b:iconAwesome></a>
+        <a class="hvr-float-shadow" ><b:iconAwesome name="twitter-square" size="3x"></b:iconAwesome></a>
+        <a class="hvr-float-shadow" ><b:iconAwesome name="instagram" size="3x" style="color: purple"></b:iconAwesome></a>
+        <br></br>
+            <h4><a href="#">www.imbahostingit.com.ec</a></h4>
+    </div>
+    </h:form>
+</f:facet>
+
+
+
+        </b:modal>
+
+
+
+
+    </h:body>
+</html>

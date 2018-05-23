@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>HUESPED</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css"/>
+        <script type="text/javascript" src="js/jquery.js"/>
+
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+                
+            }
+
+            main{
+                width: 100%;
+                display: flex;
+            }
+
+            .top{
+                padding-top: 5px;
+                background: steelblue;
+
+            }
+
+            .top label{
+                text-align: center;
+                padding: 10px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+                font-size: 25px;
+                position: relative;
+                left: 10px;
+            }
+
+            .top label:hover{
+                background: rgba(0,0,0,0.4);
+                border-radius: 5px;
+            }
+
+            .content-menu{
+                width: 200px;
+                background: rgba(0,0,0,0.8);
+                transition: all 300ms;
+                margin-bottom: -100px;
+
+            }
+
+            .content-menu2{
+                margin-left: -200px;
+            }
+
+            .content-menu li{
+                list-style: none;
+                text-align: center;
+                padding: 5px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+            }
+
+            .content-menu li:hover{
+                transform: translateX(5px);
+                background: rgba(97,162,192,0.5);
+                border-radius: 5px;
+                border-radius: 5px;
+            }
+
+            .content-menu li span{
+                font-size: 40px;
+            }
+            
+            .content-menu a{
+                 text-decoration: none;
+            }
+
+            .titulo{
+                text-align: center;
+                padding-top: 0px;
+            }
+            .output{
+                font-size: 20px; color: black;
+                font-weight: bold;
+            }
+            .input{
+                font-size: 20px; color: black;
+            }
+
+        </style>
+
+    </h:head>
+    <h:body>
+        <b:container fluid="true">
+                    <b:row class="top">
+                        <h:form>
+                        <b:column col-lg="10" col-md="10" col-sm="8">
+                            <label><b:iconAwesome name="fa-bars" class="show"/></label>&nbsp;&nbsp;
+                            <h2 style="color: whitesmoke; display: inline;"><b>ADMINISTRADOR</b></h2>
+                        </b:column>
+                        <b:column col-lg="2" col-md="2" col-sm="4">
+                            <h5>
+                                <b:dropMenu value="#{controladorusuarios.nombreusuario}" style="color: whitesmoke; font-size: 16px; text-decoration: none;font-weight: bold;">
+                                    <b:navLink value="Perfil" href="#"></b:navLink>
+                                    <b:navLink value="Horario" href="#"></b:navLink>
+                                    <b:navLink></b:navLink>
+                                    <b:navLink value="Salir" href="index.xhtml"></b:navLink>
+                                </b:dropMenu>
+                            </h5>
+                        </b:column>
+                            </h:form>
+                    </b:row>
+
+                </b:container>
+        <main>
+            <div class="content-menu">
+            <h:form>
+                <h1>&nbsp;<p:clock pattern="HH:mm:ss" /></h1>
+                 <a href="recepcionadmin.xhtml"><li><h3><b:icon name="time" /><br></br><b>RECEPCIÓN</b></h3></li></a>
+                 <a href="cajaadmin.xhtml"><li><h3><b:iconAwesome name="dollar" /><br></br><b>CAJA</b></h3></li></a>
+                 <a href="huespedesadmin.xhtml"><li><h3><b:iconAwesome name="briefcase" /><br></br><b>HUESPEDES</b></h3></li></a>
+                 <a href="habitacionesadmin.xhtml"><li style="background-color: rgba(97,162,192,0.5)"><h3><b:iconAwesome name="bed" /><br></br><b>HABITACIONES</b></h3></li></a>                             
+                <a href="empleadosadmin.xhtml"><li><h3><b:iconAwesome name="group"/><br></br><b>EMPLEADOS</b></h3></li></a>                                                                                                     
+                </h:form>
+            </div>
+
+            <b:container id="tabtotal">
+                <br></br>
+                <b:row>
+                    <b:column span="6">
+  
+                        <b:panel look="primary" title="TIPOS Y PRECIOS" style="font-size: 16px; color: black;" collapsible="false">
+                        <b:form id="tablath">
+                                    <b:row style="text-align: right;padding-right: 50px;padding-bottom: 20px;  ">
+                                        <a id="atrigger" href="#modalth" data-toggle="modal">
+                                            <b:commandButton size="lg" value="Nuevo Tipo de Habitación"  look="danger" iconAwesome="plus"
+                                                             action="#{controladortipo.limpiarcampostipo()}"  update="modalformth"></b:commandButton>
+                                        </a>
+                                    </b:row>
+                            <b:dataTable value="#{controladortipo.listatipos}" var="t" responsive="true" striped="false">
+                                        <h:column>
+                                            <f:facet name="header" >
+                                                <h:outputText value="Nombre" />
+                                            </f:facet>
+                                            <h:outputText value="#{t.nombre}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descripción" />
+                                            </f:facet>
+                                            <h:outputText value="#{t.descripcion}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Precio por día" />
+                                            </f:facet>
+                                            <h:outputText value="#{t.precio}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Precio por el momento" />
+                                            </f:facet>
+                                            <h:outputText value="#{t.preciofraccion}" />
+                                        </h:column>
+                                        <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar" />
+                                        </f:facet>
+                                        <a id="atrigger" href="#modalth" data-toggle="modal">
+                                            <b:commandButton size="lg" look="warning" iconAwesome="edit"
+                                                             action="#{controladortipo.cargartipo(t)}"
+                                                             update="modalformth"></b:commandButton>
+                                        </a>
+                                    </h:column>
+                                    </b:dataTable>                           
+                            </b:form> 
+                        </b:panel>
+                    </b:column>
+                    <b:column span="6">
+                        <b:panel look="primary" title="LISTA DE HABITACIONES" style="font-size: 16px; color: black" collapsible="false">
+                       
+                        <b:form id="tablaha">
+                                    <b:row style="text-align: right;padding-right: 50px;padding-bottom: 20px;  ">
+                                        <a id="atrigger" href="#modalha" data-toggle="modal">
+                                            <b:commandButton size="lg" value="Nueva Habitación"  look="danger" iconAwesome="plus"
+                                                             action="#{controladorhabitaciones.limpiarcamposhabitacion()}"    update="modalformha"></b:commandButton>
+                                        </a>
+                                    </b:row>
+
+                            <b:dataTable value="#{controladorhabitaciones.listahabitaciones}" var="h" responsive="true" striped="false" >
+                                        <h:column>
+                                            <f:facet name="header" >
+                                                <h:outputText value="Número" />
+                                            </f:facet>
+                                            <h:outputText value="#{h.numero}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Tipo" />
+                                            </f:facet>
+                                            <h:outputText value="#{h.idtipo.nombre}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Ubicación" />
+                                            </f:facet>
+                                            <h:outputText value="#{h.ubicacion}" />
+                                        </h:column>
+                                        <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Editar" />
+                                        </f:facet>
+                                        <a id="atrigger" href="#modalha" data-toggle="modal">
+                                            <b:commandButton size="lg" look="warning" iconAwesome="edit"
+                                                             action="#{controladorhabitaciones.cargarhabitacion(h)}"
+                                                             update="modalformha"></b:commandButton>
+                                        </a>
+                                    </h:column>
+                                    </b:dataTable>
+                            </b:form>
+                    </b:panel>
+                    </b:column>
+                </b:row>
+            </b:container>
+
+
+        </main>
+
+        <b:modal id="modalha" title="Habitación"  styleClass="modalPseudoClass" style="text-align: center">
+
+            <b:form id="modalformha">
+                <b:row>
+                    <b:column span="3">
+                        <b:iconAwesome name="bed" size="4x"></b:iconAwesome>
+                    </b:column>
+                    <b:column span="9" style="text-align: left">
+                        <h:outputText value="Número" class="output"/>
+                        <b:inputText  value="#{controladorhabitaciones.numero}" class="input" fieldSize="lg"/>
+                        <h:outputText value="Tipo habitación" class="output"/>
+                        <b:selectOneMenu value="#{controladorhabitaciones.idtipo}" required="true" class="input" fieldSize="lg">
+                            <f:selectItem itemLabel="(Seleccione)" itemValue="" class="input"/>
+                            <f:selectItems value="#{controladorhabitaciones.selecttipo}" class="input"></f:selectItems>
+                        </b:selectOneMenu> 
+                        
+                        <h:outputText value="Ubicación" class="output"/>
+                        <b:selectOneMenu value="#{controladorhabitaciones.ubicacion}" required="true" fieldSize="lg" class="input">
+                            <f:selectItem itemLabel="(Seleccione)" itemValue=""  class="input"/>
+                            <f:selectItem itemLabel="Piso 0" itemValue="Piso 0" class="input"/>
+                            <f:selectItem itemLabel="Piso 1" itemValue="Piso 1" class="input"/>
+                            <f:selectItem itemLabel="Piso 2" itemValue="Piso 2" class="input"/>
+                            <f:selectItem itemLabel="Piso 3" itemValue="Piso 3" class="input"/>
+                        </b:selectOneMenu>
+                        <h:outputText value="Estado" class="output"/>
+                        <b:inputText value="#{controladorhabitaciones.estado}" disabled="true" fieldSize="lg" class="input"/>
+                    </b:column>
+
+                </b:row>
+
+                <hr></hr>
+                <b:row style="text-align: right;padding-right: 20px;">
+                    <b:commandButton size="lg" value="Editar" look="warning" action="#{controladorhabitaciones.editarhabitacion()}" update="modalformha,tabtotal" disabled="#{controladorhabitaciones.estadoedit}" >
+                    <b:iconAwesome name="edit"></b:iconAwesome></b:commandButton>&nbsp;&nbsp;
+                    <b:commandButton size="lg" value="Agregar" look="success" 
+                                     action="#{controladorhabitaciones.crearhabitacion()}" update="modalformha,tabtotal" disabled="#{controladorhabitaciones.estadobtn}">
+                        <b:iconAwesome name="plus"></b:iconAwesome>
+                    </b:commandButton>&nbsp;&nbsp;
+                    <b:button size="lg" icon-awesome="times" value="Salir" look="primary" dismiss="modal" onclick="return false;"/> 
+                </b:row>
+
+            </b:form>
+        </b:modal>
+
+
+        <b:modal id="modalth" title="Tipo de habitación"  styleClass="modalPseudoClass2"  style="text-align: center">
+
+            <b:form id="modalformth">
+                <b:row>
+                    <b:column span="3" >
+                        <b:iconAwesome name="star" size="4x"></b:iconAwesome>
+                    </b:column>
+                    <b:column span="9" style="text-align: left">
+                        <h:outputText value="Nombre" class="output"/>
+                        <b:inputText value="#{controladortipo.nombre}" class="input" fieldSize="lg"/>
+                        <h:outputText value="Descripción" class="output"/>
+                        <b:inputText value="#{controladortipo.descripcion}" class="input" fieldSize="lg"/>
+                        <h:outputText value="Precio por día" class="output"/>
+                        <b:inputText value="#{controladortipo.precio}" class="input" fieldSize="lg"/>
+                        <h:outputText value="Precio por el momento" class="output"/>
+                        <b:inputText  value="#{controladortipo.preciofraccion}" class="input" fieldSize="lg"/>
+                    </b:column>
+
+                </b:row>
+
+                <hr></hr>
+                <b:row style="text-align: right;padding-right: 20px;">
+                    <b:commandButton size="lg" value="Editar" look="warning" action="#{controladortipo.editartipohabitacion()}" update="modalformth,tabtotal" disabled="#{controladortipo.estadoedit}" >
+                    <b:iconAwesome name="edit"></b:iconAwesome></b:commandButton>&nbsp;&nbsp;
+                    <b:commandButton size="lg" value="Agregar" look="success" 
+                                     action="#{controladortipo.creartipohabitacion()}" update="modalformth,tabtotal" disabled="#{controladortipo.estadobtn}">
+                        <b:iconAwesome name="plus"></b:iconAwesome>
+                    </b:commandButton>&nbsp;&nbsp;
+                    <b:button size="lg" icon-awesome="times" value="Salir" look="primary" dismiss="modal" onclick="return false;"/> 
+                </b:row>
+
+            </b:form>
+        </b:modal>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var show = 1;
+
+                $('.show').on('click', function () {
+                    if (show === 1) {
+                        $('.content-menu').addClass("content-menu2");
+                        show = 0;
+                    } else {
+                        $('.content-menu').removeClass("content-menu2");
+                        show = 1;
+                    }
+
+
+                });
+
+            });
+        </script>
+
+    </h:body>
+</html>

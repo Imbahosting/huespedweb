@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>HUESPED</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"/>
+        <script type="text/javascript" src="js/jquery.js"/>
+        <style type="text/css">
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+
+            }
+
+            main{
+                width: 100%;
+                display: flex;
+            }
+
+            .top{
+                padding-top: 5px;
+                background: steelblue;
+
+            }
+
+            .top label{
+                text-align: center;
+                padding: 10px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+                font-size: 25px;
+                position: relative;
+                left: 10px;
+            }
+
+            .top label:hover{
+                background: rgba(0,0,0,0.4);
+                border-radius: 5px;
+            }
+
+            .content-menu{
+                width: 200px;
+                background: rgba(0,0,0,0.8);
+                transition: all 300ms;
+                margin-bottom: -100px;
+            }
+
+            .content-menu2{
+                margin-left: -200px;
+            }
+
+            .content-menu li{
+                list-style: none;
+                text-align: center;
+                padding: 5px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+            }
+
+            .content-menu li:hover{
+                transform: translateX(5px);
+                background: rgba(97,162,192,0.5);
+                border-radius: 5px;
+                border-radius: 5px;
+            }
+
+            .content-menu li span{
+                font-size: 40px;
+            }
+
+            .content-menu a{
+                text-decoration: none;
+            }
+
+            .titulo{
+                text-align: center;
+                padding-top: 0px;
+            }
+            .output{
+                font-size: 20px; color: black;
+                font-weight: bold;
+            }
+            .input{
+                font-size: 20px; color: black;
+            }
+
+
+        </style>
+        <script>
+            var wow = new WOW(
+                    {
+                        boxClass: 'wow', // animated element css class (default is wow)
+                        animateClass: 'animated', // animation css class (default is animated)
+                        offset: 0, // distance to the element when triggering the animation (default is 0)
+                        mobile: true, // trigger animations on mobile devices (default is true)
+                        live: true, // act on asynchronously loaded content (default is true)
+                        callback: function (box) {
+// the callback is fired every time an animation is started
+// the argument that is passed in is the DOM node being animated
+                        },
+                        scrollContainer: null // optional scroll container selector, otherwise use window
+                    }
+            );
+            wow.init();
+
+        </script>
+
+    </h:head>
+    <h:body>
+
+
+        <b:container fluid="true">
+            <b:row class="top">
+                <h:form>
+                    <b:column col-lg="10" col-md="10" col-sm="8">
+                        <label><b:iconAwesome name="fa-bars" class="show"/></label>&nbsp;&nbsp;
+                        <h2 style="color: whitesmoke; display: inline;"><b>ADMINISTRADOR</b></h2>
+                    </b:column>
+                    <b:column col-lg="2" col-md="2" col-sm="4">
+                        <h5>
+                            <b:dropMenu value="#{controladorusuarios.nombreusuario}" style="color: whitesmoke; font-size: 16px; text-decoration: none;font-weight: bold;">
+                                <b:navLink value="Perfil" href="#"></b:navLink>
+                                <b:navLink value="Horario" href="#"></b:navLink>
+                                <b:navLink></b:navLink>
+                                <b:navLink value="Salir" href="index.xhtml"></b:navLink>
+                            </b:dropMenu>
+                        </h5>
+                    </b:column>
+                </h:form>
+            </b:row>
+
+        </b:container>
+        <main>
+            <div class="content-menu">
+                <h:form>
+                    <h1>&nbsp;<p:clock pattern="HH:mm:ss" /></h1>
+                    <a href="recepcionadmin.xhtml"><li><h3><b:icon name="time" /><br></br><b>RECEPCIÓN</b></h3></li></a>
+                    <a href="cajaadmin.xhtml"><li><h3><b:iconAwesome name="dollar" /><br></br><b>CAJA</b></h3></li></a>
+                    <a href="huespedesadmin.xhtml"><li><h3><b:iconAwesome name="briefcase" /><br></br><b>HUESPEDES</b></h3></li></a>
+                    <a href="habitacionesadmin.xhtml"><li><h3><b:iconAwesome name="bed" /><br></br><b>HABITACIONES</b></h3></li></a>                             
+                    <a href="empleadosadmin.xhtml"><li style="background-color: rgba(97,162,192,0.5)"><h3><b:iconAwesome name="group"/><br></br><b>EMPLEADOS</b></h3></li></a>                                                                                                     
+                </h:form>
+            </div>
+            <b:container>
+                <b:column col-md="12" col-sm="12" col-xs="12">
+                    <br></br>
+                    <h:form id="tabla">
+                        <b:panel look="primary" title="LISTA DE EMPLEADOS" style="font-size: 15px; color: black;" collapsible="false">
+
+                            <b:row style="text-align: right;padding-right: 50px;padding-bottom: 20px;  ">
+                                <a id="atrigger" href="#modale" data-toggle="modal">
+                                    <b:commandButton size="lg" value="Nuevo Usuario" look="danger" iconAwesome="plus" 
+                                                     action="#{controladorempleados.limpiarcampos()}" update="modalform1"></b:commandButton>
+                                </a>
+                            </b:row>
+
+                            <b:dataTable  value="#{controladorempleados.listaempleados}" var="e" responsive="true" striped="false">
+                                <h:column>
+                                    <f:facet name="header" >
+                                        <h:outputText value="Cédula" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.cedula}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.nombre}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.apellido}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Direccion" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.direccion}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Telefono" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.telefono}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.usuario}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >
+                                        <h:outputText value="Rol" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.idrol.cargo}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >
+                                        <h:outputText value="Sucursal" />
+                                    </f:facet>
+                                    <h:outputText value="#{e.idsucursal.nombrecomercial}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado" />
+                                    </f:facet>
+                                    <b:switch   off-text="NO" on-text="SI" value="#{e.estado}">
+                                    </b:switch>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Editar" />
+                                    </f:facet>
+                                    <a id="atrigger" href="#modale" data-toggle="modal">
+                                        <b:commandButton size="lg" look="warning" iconAwesome="edit"
+                                                         action="#{controladorempleados.cargarempleado(e)}" update="modalform1"></b:commandButton>
+                                    </a>
+                                </h:column>
+                            </b:dataTable>
+                        </b:panel>
+                    </h:form>
+                </b:column>
+            </b:container>
+
+
+
+        </main>
+
+        <!-- AGREGAR EMPLEADO -->
+
+        <b:modal id="modale"  style="font-family: cursive;"  styleClass="modalPseudoClass" closable="false" >
+            <b:form id="modalform1">
+
+                <b:container>             
+                    <b:row>
+                        <b:column span="1">
+                            <b:iconAwesome name="user" size="4x"></b:iconAwesome>
+                        </b:column>
+                        <b:column span="3">
+                            <h:outputText value="Identificación:" class="output"></h:outputText>
+                            <b:inputText fieldSize="lg" class="input" id="cedulamsj" required="true" value="#{controladorempleados.cedula}" requiredMessage="El campo identificación es requerido">                          
+
+                                <f:facet name="append">
+                                    <b:commandButton size="lg" value="" action="#{controladorempleados.verificarempleado()}" update="modalform1,cedulamsj" >
+                                        <b:iconAwesome name="search" /> 
+                                    </b:commandButton>
+                                </f:facet>
+                                <f:validateLength minimum="10" />
+                            </b:inputText>
+
+                        </b:column>
+
+                        <b:column span="3">
+                            <h:outputText value="Estado:" class="output"></h:outputText>
+                            <b:switch fieldSize="lg"  off-text="OFF" on-text="ON" value="#{controladorempleados.estado}"/>
+                        </b:column>
+
+                    </b:row>
+                    <b:row>
+                        <b:column span="3">
+                            <h:outputText value="Nombres:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.nombre}" fieldSize="lg" class="input"></b:inputText> 
+                        </b:column>
+                        <b:column span="3">
+                            <h:outputText value="Apellidos:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.apellido}" fieldSize="lg" class="input"></b:inputText>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="3">
+                            <h:outputText value="Direccion:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.direccion}" fieldSize="lg" class="input"></b:inputText> 
+                        </b:column>
+                        <b:column span="3">
+                            <h:outputText value="Telefono:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.telefono}" fieldSize="lg" class="input"></b:inputText>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="3">
+                            <h:outputText value="Usuario:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.usuario}" fieldSize="lg" class="input"></b:inputText> 
+                        </b:column>
+                        <b:column span="3">
+                            <h:outputText value="Contraseña:" class="output"></h:outputText>
+                            <b:inputSecret id="con" value="#{controladorempleados.contrasenia}" fieldSize="lg" class="input">
+                                <f:facet name="append">
+
+                                    <b:iconAwesome name="eye" /> 
+
+                                </f:facet>
+
+                            </b:inputSecret>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="3">
+                            <h:outputText value="Cargo:" class="output"></h:outputText>
+                            <b:selectOneMenu value="#{controladorempleados.idrol}" class="input" fieldSize="lg">
+                                <f:selectItem itemLabel="(Please select)" itemValue="" class="input"/>
+                                <f:selectItems value="#{controladorempleados.selectrol}" class="input"></f:selectItems>
+                            </b:selectOneMenu>  
+                        </b:column>
+
+                        <b:column span="3">
+                            <h:outputText value="Sucursal:" class="output"></h:outputText>
+                            <b:inputText value="#{controladorempleados.ciudaduser}" disabled="true" class="input" fieldSize="lg"></b:inputText> 
+
+                        </b:column>
+
+
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="6">
+                            <b:messages class="input"></b:messages>
+                        </b:column>
+
+                    </b:row>   
+
+
+                </b:container> 
+                <hr></hr>
+
+                <div align="right">
+                    <b:commandButton size="lg" value="Editar" look="warning" action="#{controladorempleados.editarempleado()}" update="modalform1,tabla" disabled="#{controladorempleados.estadoedit}" ></b:commandButton>
+                    &nbsp;&nbsp;<b:commandButton size="lg" value="Agregar" look="success" action="#{controladorempleados.insertarregistrodeusuario()}" 
+                                                 update="modalform1,tabla" disabled="#{controladorempleados.estadobtn}"></b:commandButton>
+                    &nbsp;&nbsp;<b:button size="lg" value="SALIR" look="primary" dismiss="modal" onclick="return false;"/>  
+                </div>
+
+
+            </b:form>
+
+
+        </b:modal>      
+
+
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var show = 1;
+
+                $('.show').on('click', function () {
+
+                    if (show === 1) {
+                        $('.content-menu').addClass("content-menu2");
+                        show = 0;
+                    } else {
+                        $('.content-menu').removeClass("content-menu2");
+                        show = 1;
+                    }
+
+
+                });
+
+            });
+
+        </script>
+
+    </h:body>
+</html>

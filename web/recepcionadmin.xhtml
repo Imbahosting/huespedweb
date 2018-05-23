@@ -1,0 +1,459 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>HUESPED</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"/>
+        <script type="text/javascript" src="js/jquery.js"/>
+        <style type="text/css">
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+
+            }
+
+            main{
+                width: 100%;
+                display: flex;
+            }
+
+            .top{
+                padding-top: 5px;
+                background: steelblue;
+
+            }
+
+            .top label{
+                text-align: center;
+                padding: 10px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+                font-size: 25px;
+                position: relative;
+                left: 10px;
+            }
+
+            .top label:hover{
+                background: rgba(0,0,0,0.4);
+                border-radius: 5px;
+            }
+
+            .content-menu{
+                width: 200px;
+                background: rgba(0,0,0,0.8);
+                transition: all 300ms;
+                margin-bottom: -100px;
+                
+            }
+
+            .content-menu2{
+                margin-left: -200px;
+            }
+
+            .content-menu li{
+                list-style: none;
+                text-align: center;
+                padding: 5px;
+                color: whitesmoke;
+                transition: all 300ms;
+                cursor: pointer;
+            }
+
+            .content-menu li:hover{
+                transform: translateX(5px);
+                background: rgba(97,162,192,0.5);
+                border-radius: 5px;
+                border-radius: 5px;
+            }
+
+            .content-menu li span{
+                font-size: 40px;
+            }
+
+            .content-menu a{
+                text-decoration: none;
+            }
+
+            .titulo{
+                text-align: center;
+                padding-top: 0px;
+            }
+            .cuarto{
+                height: 90%;
+                width: 70%;
+                cursor: pointer;
+                margin-top: 10px;
+                color: black;
+            }
+            .centrar{
+                text-align: center;
+            }
+            .num{
+                font-size: 45px;
+                font-weight: bold;
+            }
+            .ubicacion{
+                text-align: left; padding-left: 40px;
+                font-weight: bold;
+            }
+            .tipo{
+                font-size: 20px;
+                background-color:rgba(0,0,0,0.5);
+            }
+            
+            .texto{
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .output{
+                font-size: 20px; color: black;
+                font-weight: bold;
+            }
+            .output2{
+                font-size: 20px; color: black;
+
+            }
+            .input{
+                font-size: 25px; color: black;
+            }
+
+            @media screen and (max-width: 1000px){
+                .num{
+                    font-size: 35px;
+
+                }
+                .tipo{
+                    font-size:14px;
+                }
+                @media screen and (max-width: 700px){
+                    .num{
+                        font-size: 30px;
+                    }
+                    .tipo{
+                        font-size:12px;
+                    }
+                    @media screen and (max-width: 400px){
+                        .num{
+                            font-size: 20px;
+                        }
+                        .tipo{
+                            font-size:10px;
+                        }
+
+                    }
+
+                </style>
+                <script>
+                    var wow = new WOW(
+                            {
+                                boxClass: 'wow', // animated element css class (default is wow)
+                                animateClass: 'animated', // animation css class (default is animated)
+                                offset: 0, // distance to the element when triggering the animation (default is 0)
+                                mobile: true, // trigger animations on mobile devices (default is true)
+                                live: true, // act on asynchronously loaded content (default is true)
+                                callback: function (box) {
+                                    // the callback is fired every time an animation is started
+                                    // the argument that is passed in is the DOM node being animated
+                                },
+                                scrollContainer: null // optional scroll container selector, otherwise use window
+                            }
+                    );
+                    wow.init();
+
+                </script>
+                <meta http-equiv="refresh" content="200" />
+            </h:head>
+            <h:body onload="#{controladorecepcion.metodosemaforo()}">
+
+
+                <b:container fluid="true">
+                    <b:row class="top">
+                        <h:form>
+                            <b:column col-lg="10" col-md="10" col-sm="8">
+                                <label><b:iconAwesome name="fa-bars" class="show"/></label>&nbsp;&nbsp;
+                                <h2 style="color: whitesmoke; display: inline;"><b>ADMINISTRADOR</b></h2>
+                            </b:column>
+                            <b:column col-lg="2" col-md="2" col-sm="4">
+                                <h5>
+                                    <b:dropMenu value="#{controladorusuarios.nombreusuario}" style="color: whitesmoke; font-size: 16px; text-decoration: none;font-weight: bold;">
+                                        <b:navLink value="Perfil" href="#"></b:navLink>
+                                        <b:navLink value="Horario" href="#"></b:navLink>
+                                        <b:navLink></b:navLink>
+                                        <b:navLink value="Salir" href="index.xhtml"></b:navLink>
+                                    </b:dropMenu>
+                                </h5>
+                            </b:column>
+                        </h:form>
+                    </b:row>
+
+                </b:container>
+                <main>
+                    <div class="content-menu">
+                        <h:form>
+                            <h1>&nbsp;<p:clock pattern="HH:mm:ss" /></h1>
+                            <a href="recepcionadmin.xhtml"><li style="background-color: rgba(97,162,192,0.5)"><h3><b:icon name="time" /><br></br><b>RECEPCIÓN</b></h3></li></a>
+                                <a href="cajaadmin.xhtml"><li><h3><b:iconAwesome name="dollar" /><br></br><b>CAJA</b></h3></li></a>
+                                <a href="huespedesadmin.xhtml"><li><h3><b:iconAwesome name="briefcase" /><br></br><b>HUESPEDES</b></h3></li></a>                       
+                                <a href="habitacionesadmin.xhtml"><li><h3><b:iconAwesome name="bed" /><br></br><b>HABITACIONES</b></h3></li></a>                             
+                                <a href="empleadosadmin.xhtml"><li><h3><b:iconAwesome name="group"/><br></br><b>EMPLEADOS</b></h3></li></a>                                                                                                     
+                            </h:form>
+                        </div>
+                        <b:container>
+                            <b:column  class="centrar" col-md="12" col-sm="12" col-xs="12">
+                                <br></br>
+
+                                <h:form id="form">
+
+                                    <p:dataGrid var="ha" value="#{controladorecepcion.listahabitaciones}"  columns="4" layout="grid">
+                                      <!-- <div class="wow pulse" data-wow-iteration="#{controladorecepcion.iteracion(ha.numero)}"></div>-->
+                                        <a id="atrigger" href="#{controladorecepcion.abrirmodal(ha.idhabitacion)}" data-toggle="#{controladorecepcion.bloquearmodal(ha.idhabitacion)}">
+
+                                            <b:commandButton class="cuarto hvr-box-shadow-outset" look="#{ha.estado}" tooltip="#{controladorecepcion.nombrehuesped(ha.idhabitacion)}"
+                                                             action="#{controladorecepcion.cargarnumerohabitacion(ha)}" update="#{controladorecepcion.actualizarmodal(ha.idhabitacion)}">
+                                                <h:outputText value="#{ha.numero}" class="num" /><br></br>
+                                                <b:label value="#{controladorecepcion.Descripcionestado(ha.idhabitacion)}" class="tipo" severity="default"/> <br></br>
+                                                <h:outputText value="#{ha.idtipo.nombre}" class="texto"/> <br></br>
+                                                <h:outputText value="#{ha.ubicacion}" class="texto"/> <br></br>
+
+                                            </b:commandButton>
+                                        </a>
+
+                                    </p:dataGrid>
+
+                                </h:form>
+
+                            </b:column>
+                        </b:container>
+
+
+
+                    </main>
+
+                <b:modal id="modalr" styleClass="modalPseudoClass" size="modal-lg" closable="false" >
+
+                        <b:form id="modalform">
+                            <b:row>
+                                <b:column span="6" >  
+                                    <h:outputText value="ALQUILAR HABITACIÓN: " class="output"/>&nbsp;&nbsp;
+                                    <b:label value="#{controladorecepcion.numero}" style="font-size: 35px; font-weight: bold;" severity="success"/> 
+                                <br></br><br></br>
+                                <h:outputText value="Huesped" class="output"/>
+                                <b:inputText id="cedulamsj" required="true" value="#{controladorhuespedes.cedularuc}"
+                                             requiredMessage="El campo identificación es requerido" class="input" fieldSize="lg"  >                          
+
+                                    <f:facet name="append" >
+                                        <b:commandButton  size="lg" value="" action="#{controladorhuespedes.verificarcliente()}" 
+                                                          update="modalform" >
+                                            <b:iconAwesome name="search" /> 
+                                        </b:commandButton>
+                                    </f:facet>
+                                    <f:validateLength minimum="10" maximum="10" />
+                                </b:inputText> 
+
+
+
+                                <h:outputText value="Nombre" class="output"/>
+                                <b:inputText value="#{controladorhuespedes.nombreCliente}" class="input" fieldSize="lg"/>
+                                <h:outputText value="Apellido" class="output"/>
+                                <b:inputText value="#{controladorhuespedes.apellido}" class="input" fieldSize="lg"/> 
+                                <h:outputText value="Dirección" class="output"/>
+                                <b:inputText value="#{controladorhuespedes.ciudad}" class="input" fieldSize="lg"/>
+                                <h:outputText value="Teléfono" class="output"/>
+                                <b:inputText value="#{controladorhuespedes.telefono}" class="input" fieldSize="lg"/>
+
+                                <b:row style="text-align: right;padding-right: 20px;">
+
+                                    <b:commandButton size="lg" value="Editar" look="warning" action="#{controladorhuespedes.editarhuesped()}" disabled="#{controladorhuespedes.estadoedit}" update="modalform" >
+                                        <b:iconAwesome name="edit"></b:iconAwesome></b:commandButton>&nbsp;&nbsp;
+                                    <b:commandButton size="lg" value="Registrar"  action="#{controladorhuespedes.crearhuesped()}" update="modalform"
+                                                     look="success" disabled="#{controladorhuespedes.estadobtn}">
+                                        <b:iconAwesome name="plus"></b:iconAwesome>
+                                    </b:commandButton>                             
+                                </b:row>
+                            </b:column>
+
+
+                            <b:column span="6">
+                                <b:row>
+                                    <b:column span="4">
+                                        <h:outputText value="Dias/Horas" class="output"/>
+                                        <b:inputText value="#{controladorecepcion.numdiashoras}" class="input" fieldSize="lg" />
+                                    </b:column>
+                                    <b:column span="8">
+                                        <br></br>
+                                        <b:commandButton size="lg" value="Días" action="#{controladorecepcion.calcularpreciopordia()}" update="modalform" look="info">
+                                            <b:iconAwesome name="calendar"></b:iconAwesome>
+                                        </b:commandButton>&nbsp;
+                                        <b:commandButton size="lg" value="Momento"  action="#{controladorecepcion.calcularprecioporhoras()}" update="modalform"  look="info">
+                                            <b:icon name="time"></b:icon>
+                                        </b:commandButton>    
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column span="6">
+                                        <h:outputText value="Fecha de entrada" class="output"/>
+                                        <b:inputText value="#{controladorecepcion.fechaentrada}" disabled="true" class="input" fieldSize="lg">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="America/Bogota" />  
+                                        </b:inputText> 
+                                        <h:outputText value="Hora de entrada" class="output"/>
+                                        <b:inputText value="#{controladorecepcion.horaentrada}" disabled="true" class="input" fieldSize="lg">
+                                            <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota" />
+                                        </b:inputText> 
+                                    </b:column>
+                                    <b:column span="6">
+                                        <h:outputText value="Fecha de salida" class="output"/>
+                                        <b:inputText value="#{controladorecepcion.fechasalida}" class="input" fieldSize="lg" disabled="true">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="America/Bogota" />                                
+                                        </b:inputText>
+                                        
+                                        <h:outputText value="Hora de salida" class="output"/>
+                                        <b:inputText value="#{controladorecepcion.horasalida}" class="input" fieldSize="lg" disabled="true">
+                                            <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota" />
+                                        </b:inputText>
+                                    </b:column>
+                                </b:row>
+                                <br></br>
+                                <b:row>
+                                    <b:column span="6">
+                                        <br></br>
+                                        <h2 style=" display: inline; color: darkred" class="output">TOTAL A PAGAR:</h2>
+                                    </b:column>
+                                    <b:column span="6">
+                                        <b:inputText value="#{controladorecepcion.preciototal}" style="font-size: 200%; font-weight: bold;" class="input" fieldSize="lg">
+                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2"
+                                                         currencySymbol="$" />
+                                    </b:inputText>
+                                    </b:column>
+                                </b:row>
+                                
+                                <br></br>
+                            <b:row style="text-align: right;padding-right: 20px;">
+                                <b:commandButton size="lg" value="Alquilar habitación"  action="#{controladorecepcion.alquilarhabitacion()}" disabled="#{controladorhuespedes.estadoedit}" look="danger" update="form,modalform">
+                                <b:iconAwesome name="check"></b:iconAwesome>
+                            </b:commandButton>&nbsp;&nbsp;
+                            <b:button size="lg" icon-awesome="times" value="Salir" look="primary" dismiss="modal" onclick="return false;"/> 
+                        </b:row>
+                                <br></br>
+                                <b:messages class="output"></b:messages>
+                                
+                            </b:column>
+                        </b:row>
+                            <hr></hr>
+                    </b:form>
+                </b:modal>
+
+
+
+               <b:modal id="modaldes" title="DETALLES ALQUILER" styleClass="modalPseudoClass2" closable="false" >
+
+                   <b:form id="modalformdes">
+                        <b:row style="padding-left: 20px; padding-right: 20px;">
+                            <b:column span="4">
+                                <b:label  value="HABITACIÓN"  class="output" severity="warning"/><br></br><br></br>                                
+                            </b:column>
+                            <b:column span="8">
+                                   <h:outputText value="#{controladorecepcion.numero}" class="output2" /><br></br><br></br>                                 
+                            </b:column>
+                        </b:row>
+                        <b:row style="padding-left: 20px; padding-right: 20px;">
+                            <b:column span="4">                               
+                                <b:label  value="TIPO"  class="output" severity="warning"/><br></br><br></br>                                
+                            </b:column>
+                            <b:column span="8">             
+                                   <h:outputText value="#{controladorecepcion.habit.idtipo.nombre}" class="output2" /><br></br><br></br>
+                            </b:column>
+                        </b:row>
+                        <b:row style="padding-left: 20px; padding-right: 20px;">
+                            <b:column span="4">                               
+                                <b:label  value="HUESPED" class="output" severity="warning"/><br></br><br></br>
+                            </b:column>
+                            <b:column span="8">
+                                     <h:outputText value="#{controladorecepcion.nombrehuespedm2()}" class="output2"/><br></br><br></br>
+                            </b:column>
+                        </b:row>
+
+                        
+                        <br></br><br></br>
+                        <b:row style="padding-left: 20px; padding-right: 20px;">
+                            <b:column span="4">
+                                <b:label  value="ENTRADA" severity="success" class="output"/><br></br><br></br>
+                                
+                            </b:column>
+                            <b:column span="4">
+                                <h:outputText value="#{controladorecepcion.diaentrada()}" class="output2" >
+                                    <f:convertDateTime pattern="dd-MM-yyyy" timeZone="America/Bogota" />                  
+                                </h:outputText><br></br><br></br>
+                                
+                            </b:column>
+                            <b:column span="4">
+                                <h:outputText value="#{controladorecepcion.horaentrada()}" class="output2" >
+                                    <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota" />                  
+                                </h:outputText>  <br></br><br></br>
+                                
+                            </b:column>
+                        </b:row>
+                        <b:row style="padding-left: 20px; padding-right: 20px;">
+                            <b:column span="4">
+                               
+                                <b:label  value="SALIDA" severity="danger" class="output"/><br></br><br></br>
+                            </b:column>
+                            <b:column span="4">
+                                
+                                <h:outputText value="#{controladorecepcion.diasalida()}"  class="output2">
+                                    <f:convertDateTime pattern="dd-MM-yyyy" timeZone="America/Bogota" />                  
+                                </h:outputText><br></br><br></br>
+                            </b:column>
+                            <b:column span="4">
+                                
+                                <h:outputText value="#{controladorecepcion.horasalida()}" class="output2">
+                                    <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota" />                  
+                                </h:outputText><br></br><br></br>
+                            </b:column>
+                        </b:row>
+
+                        <hr></hr>
+                        <b:row style="text-align: right;padding-right: 20px;">
+                            <b:commandButton size="lg" icon-awesome="toggle-off" value="Habilitar" look="success"   action="#{controladorecepcion.habilitarcuarto()}" ></b:commandButton> &nbsp;&nbsp;
+                            <b:button size="lg" icon-awesome="times" value="Salir" look="primary" dismiss="modal" onclick="return false;"/> 
+                        </b:row>
+                        
+
+                    </b:form>
+                </b:modal>
+
+
+
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        var show = 1;
+
+                        $('.show').on('click', function () {
+
+                            if (show === 1) {
+                                $('.content-menu').addClass("content-menu2");
+                                show = 0;
+                            } else {
+                                $('.content-menu').removeClass("content-menu2");
+                                show = 1;
+                            }
+
+
+                        });
+
+                    });
+
+                </script>
+
+            </h:body>
+        </html>
