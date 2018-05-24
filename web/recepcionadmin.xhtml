@@ -170,15 +170,10 @@
                     wow.init();
 
                 </script>
-                <meta http-equiv="refresh" content="200" />
+        <meta http-equiv="refresh" content="900" />
             </h:head>
-            <h:body >
+            <h:body onload="#{controladorecepcion.metodosemaforo()}">
 
-<h:form id="mensaje">
-    <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
-        show-detail="true" show-summary="false" allowDismiss="true"
-        delay="10000" escape="true" /> 
-        </h:form>
                 
                 <b:container fluid="true">
                     <b:row class="top">
@@ -215,13 +210,10 @@
                         <b:container>
                             <b:column  class="centrar" col-md="12" col-sm="12" col-xs="12">
                                 <br></br>
-                                <b:form>
-                                    <b:commandButton action="#{controladorecepcion.metodosemaforo()}" value="ver" update="form"></b:commandButton>
-                                </b:form>
-                                <h:form id="form">
 
-                                   
-                                    
+                                <h:form id="form">
+                                  
+
                                     <p:dataGrid var="ha" value="#{controladorecepcion.listahabitaciones}"  columns="4" layout="grid">
                                       <!-- <div class="wow pulse" data-wow-iteration="#{controladorecepcion.iteracion(ha.numero)}"></div>-->
                                         <a id="atrigger" href="#{controladorecepcion.abrirmodal(ha.idhabitacion)}" data-toggle="#{controladorecepcion.bloquearmodal(ha.idhabitacion)}">
@@ -320,12 +312,12 @@
                                     </b:column>
                                     <b:column span="6">
                                         <h:outputText value="Fecha de salida" class="output"/>
-                                        <b:inputText value="#{controladorecepcion.fechasalida}" class="input" fieldSize="lg" >
+                                        <b:inputText value="#{controladorecepcion.fechasalida}" class="input" fieldSize="lg" disabled="true">
                                             <f:convertDateTime pattern="dd-MM-yyyy" timeZone="America/Bogota" />                                
                                         </b:inputText>
                                         
                                         <h:outputText value="Hora de salida" class="output"/>
-                                        <b:inputText value="#{controladorecepcion.horasalida}" class="input" fieldSize="lg" >
+                                        <b:inputText value="#{controladorecepcion.horasalida}" class="input" fieldSize="lg" disabled="true">
                                             <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota" />
                                         </b:inputText>
                                     </b:column>

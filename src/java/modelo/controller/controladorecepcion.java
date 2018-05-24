@@ -448,19 +448,22 @@ public void metodosemaforo() throws Exception {
                       }
                    
                     }
-                    
-           
-                    
-                    
-            } 
+                     if(fechasa.compareTo(fechaac)<=0)
+                    {  
+                     managerapp.editarcolor(a.getIdhabitacion().getIdhabitacion());
+                    } 
             
+             if(fechasa.compareTo(fechaac)>=0)
+                    {  
+                     managerapp.editarcolorrojo(a.getIdhabitacion().getIdhabitacion());
+                    } 
             
-                }
+                
             }
 
     }
 
-
+            }}
 
       
 
@@ -583,4 +586,9 @@ public void metodosemaforo() throws Exception {
 }
     
  
+     public void desactivarboto()
+     {
+         actualizar ="refresh";
+     }
+     
 }
